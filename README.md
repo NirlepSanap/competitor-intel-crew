@@ -1,4 +1,4 @@
-# 🕵️ Competitor Intel Crew — SIMPLE VERSION
+# 🕵️ Competitor Intel Crew
 
 > An automated multi-agent AI system that researches competitors, analyzes sentiment, and generates professional market intelligence reports — powered by CrewAI and local LLMs via Ollama.
 
