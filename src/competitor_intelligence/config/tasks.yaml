@@ -1,0 +1,69 @@
+research_task:
+  description: >
+    Search for {competitors} on Amazon India and Flipkart.
+    Find current prices, top products, active promotions, and
+    any new product launches in the last 7 days.
+    Market context: {market}
+  expected_output: >
+    A detailed list of each competitor's top 3 products with prices,
+    ratings, review counts, and any active promotions. Include source URLs.
+  agent: web_researcher
+
+sentiment_task:
+  description: >
+    Analyze the most recent customer reviews for {competitors}.
+    Focus on the top 3 complaints and top 3 praises for each brand.
+    Look for emerging patterns or shifts in customer sentiment.
+  expected_output: >
+    A sentiment summary per brand: top complaints, top praises,
+    overall sentiment score (positive/neutral/negative), and
+    any notable trends in the last 7 days.
+  agent: sentiment_analyst
+  context:
+    - research_task
+
+analysis_task:
+  description: >
+    Compare {competitors} across pricing, product range, promotions,
+    and customer sentiment. Identify which brand is winning and why.
+    Spot gaps in the market that are currently unserved.
+  expected_output: >
+    A competitive comparison table and a written analysis identifying
+    the market leader, key differentiators, and 2-3 market gaps.
+  agent: competitor_analyst
+  context:
+    - research_task
+    - sentiment_task
+
+strategy_task:
+  description: >
+    Based on the competitive analysis, generate 5 specific, actionable
+    recommendations for a business competing in {market}.
+    Rank them by impact (High/Medium/Low) and effort (High/Medium/Low).
+  expected_output: >
+    A ranked list of 5 recommendations. Each has: title, impact level,
+    effort level, and a 2-sentence action description.
+  agent: strategy_generator
+  context:
+    - analysis_task
+
+report_task:
+  description: >
+    Write a complete competitor intelligence report combining all findings.
+    Include: executive summary, key findings, sentiment highlights,
+    competitive analysis, ranked recommendations, and sources.
+    Market: {market}. Competitors: {competitors}.
+    Format the entire report in clean Markdown.
+  expected_output: >
+    A professional markdown report with sections for executive summary,
+    key findings, sentiment highlights, competitive analysis,
+    ranked recommendations, and sources.
+  agent: report_writer
+  output_file: output/intelligence_report.md
+  create_directory: true
+  markdown: true
+  context:
+    - research_task
+    - sentiment_task
+    - analysis_task
+    - strategy_task
