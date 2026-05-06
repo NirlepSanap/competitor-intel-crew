@@ -1,4 +1,4 @@
-# 🕵️ Competitor Intel Crew
+# 🕵️ Multi-Agent-Competitor-Intelligence-Workflow
 
 > Paste one command. Get a full competitor intelligence report in minutes.
 
